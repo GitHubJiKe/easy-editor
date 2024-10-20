@@ -29,7 +29,7 @@ previewBtn?.addEventListener("click", () => {
     shareBtn?.classList.toggle("hidden");
 });
 
-tippy(shareBtn!, {
+const popover = tippy(shareBtn!, {
     allowHTML: true,
     content: `<div id="menu">
       <button id="png">PNG</button>
@@ -130,6 +130,7 @@ tippy(shareBtn!, {
                     default:
                         break;
                 }
+                popover.hide();
             },
         );
     },
