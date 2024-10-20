@@ -1,0 +1,93 @@
+body {
+    width: 100%;
+    justify-content: center;
+    font-family: "Noto Serif SC", serif;
+    font-optical-sizing: auto;
+    overflow-x: hidden;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.site-title {
+    background-color: rgba(200, 200, 200, 0.6);
+    padding: 1rem;
+    border-radius: 0.2rem;
+    width: 40rem;
+}
+
+.easy-editor {
+    width: 40rem;
+    min-height: 400px;
+    outline: none;
+    resize: vertical;
+    line-height: 2;
+    padding: 1rem !important;
+    display: block;
+    border-radius: 0.2rem;
+}
+
+.noto-serif-sc-easy-editor {
+    font-family: "Noto Serif SC", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 0.8rem;
+}
+
+.btns {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 5rem;
+    gap: 1rem;
+}
+
+.preview-editor {
+    padding: 1rem;
+    word-wrap: break-word;
+    /* user-select: none; */
+}
+
+.preview-editor-view {
+    width: 40rem;
+    outline: none;
+    border: 1px solid #333;
+    border-radius: 0.2rem;
+}
+.preview-editor-view-mobile {
+    width: 24rem !important;
+    outline: none;
+    border: 1px solid #333;
+    border-radius: 0.2rem;
+}
+
+.preview-editor::after {
+    content: "@Easy Editor" !important;
+    display: block !important;
+    color: silver;
+    font-size: smaller;
+    font-family: "Noto Serif SC", serif;
+    font-optical-sizing: auto;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    width: 100px;
+    height: 36px;
+    cursor: pointer;
+    background-color: #fff;
+    outline: none;
+    border: 1px solid #333;
+    border-radius: 0.2rem;
+    line-height: 34px;
+}
