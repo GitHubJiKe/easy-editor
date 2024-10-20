@@ -93,7 +93,9 @@ tippy(shareBtn!, {
                     editor.previewPane.classList.remove("preview-editor-view");
                     const filename = prompt("type in filename", "easy-editor");
                     if (!filename) {
-                        return;
+                        return editor.previewPane.classList.add(
+                            "preview-editor-view",
+                        );
                     }
                     const opt = {
                         margin: 1,
