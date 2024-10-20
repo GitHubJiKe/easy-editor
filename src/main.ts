@@ -29,17 +29,18 @@ previewBtn?.addEventListener("click", () => {
     shareBtn?.classList.toggle("hidden");
 });
 
-const popover = tippy(shareBtn!, {
+tippy(shareBtn!, {
     allowHTML: true,
     content: `<div id="menu">
       <button id="png">PNG</button>
       <button id="mobile">Mobile</button>
       <button id="pdf">PDF</button>
     </div>`,
-    onShown() {
+    onShown(instance) {
         (document.querySelector("#menu") as HTMLDivElement)?.addEventListener(
             "click",
             (e: MouseEvent) => {
+                instance.hide();
                 // @ts-ignore
                 switch (e.target?.id as string) {
                     case "png":
@@ -130,7 +131,6 @@ const popover = tippy(shareBtn!, {
                     default:
                         break;
                 }
-                popover.hide();
             },
         );
     },
