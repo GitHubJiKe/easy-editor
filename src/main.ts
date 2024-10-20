@@ -37,102 +37,89 @@ tippy(shareBtn!, {
       <button id="pdf">PDF</button>
     </div>`,
     onShown(instance) {
-        (document.querySelector("#menu") as HTMLDivElement)?.addEventListener(
-            "click",
-            (e: MouseEvent) => {
-                instance.hide();
-                // @ts-ignore
-                switch (e.target?.id as string) {
-                    case "png":
-                        htmlToImage
-                            .toPng(editor.previewPane)
-                            .then(function (dataUrl: string) {
-                                const filename = prompt(
-                                    "type in filename",
-                                    "easy-editor",
-                                );
+        const menu = (document.querySelector("#menu") as HTMLDivElement)!;
+        const eventHandle = (e: MouseEvent) => {
+            instance.hide();
+            menu.removeEventListener("click", eventHandle);
+            // @ts-ignore
+            switch (e.target?.id as string) {
+                case "png":
+                    htmlToImage
+                        .toPng(editor.previewPane)
+                        .then(function (dataUrl: string) {
+                            const filename = prompt(
+                                "type in filename",
+                                "easy-editor",
+                            );
 
-                                if (!filename) {
-                                    return;
-                                }
-                                // @ts-ignore
-                                download(dataUrl, filename + ".png");
-                            })
-                            .catch(function (error: Error) {
-                                console.error(
-                                    "oops, something went wrong!",
-                                    error,
-                                );
-                            });
-                        break;
-                    case "mobile":
-                        editor.previewPane.classList.add(
+                            if (!filename) {
+                                return;
+                            }
+                            // @ts-ignore
+                            download(dataUrl, filename + ".png");
+                        })
+                        .catch(function (error: Error) {
+                            console.error("oops, something went wrong!", error);
+                        });
+                    break;
+                case "mobile":
+                    editor.previewPane.classList.add(
+                        "preview-editor-view-mobile",
+                    );
+                    htmlToImage
+                        .toPng(editor.previewPane)
+                        .then(function (dataUrl: string) {
+                            const filename = prompt(
+                                "type in filename",
+                                "easy-editor",
+                            );
+
+                            if (!filename) {
+                                return;
+                            }
+                            // @ts-ignore
+                            download(dataUrl, filename + ".png");
+                        })
+                        .catch(function (error: Error) {
+                            console.error("oops, something went wrong!", error);
+                        });
+                    setTimeout(() => {
+                        editor.previewPane.classList.remove(
                             "preview-editor-view-mobile",
                         );
-                        htmlToImage
-                            .toPng(editor.previewPane)
-                            .then(function (dataUrl: string) {
-                                const filename = prompt(
-                                    "type in filename",
-                                    "easy-editor",
-                                );
+                    }, 1000);
+                    break;
+                case "pdf":
+                    editor.previewPane.classList.remove("preview-editor-view");
+                    const filename = prompt("type in filename", "easy-editor");
+                    const opt = {
+                        margin: 1,
+                        filename: filename + ".pdf",
+                        image: { type: "jpeg", quality: 1 },
+                        html2canvas: {
+                            scale: 4,
+                            useCORS: true,
+                            allowTaint: true,
+                        },
+                        jsPDF: {
+                            unit: "mm",
+                            format: "a4",
+                            orientation: "portrait",
+                            floatPrecision: "smart",
+                        },
+                        enableLinks: true,
+                    };
 
-                                if (!filename) {
-                                    return;
-                                }
-                                // @ts-ignore
-                                download(dataUrl, filename + ".png");
-                            })
-                            .catch(function (error: Error) {
-                                console.error(
-                                    "oops, something went wrong!",
-                                    error,
-                                );
-                            });
-                        setTimeout(() => {
-                            editor.previewPane.classList.remove(
-                                "preview-editor-view-mobile",
-                            );
-                        }, 1000);
-                        break;
-                    case "pdf":
-                        editor.previewPane.classList.remove(
-                            "preview-editor-view",
-                        );
-                        const filename = prompt(
-                            "type in filename",
-                            "easy-editor",
-                        );
-                        const opt = {
-                            margin: 1,
-                            filename: filename + ".pdf",
-                            image: { type: "jpeg", quality: 1 },
-                            html2canvas: {
-                                scale: 4,
-                                useCORS: true,
-                                allowTaint: true,
-                            },
-                            jsPDF: {
-                                unit: "mm",
-                                format: "a4",
-                                orientation: "portrait",
-                                floatPrecision: "smart",
-                            },
-                            enableLinks: true,
-                        };
-
-                        html2pdf().set(opt).from(editor.previewPane).save();
-                        setTimeout(() => {
-                            editor.previewPane.classList.add(
-                                "preview-editor-view",
-                            );
-                        }, 1000);
-                        break;
-                    default:
-                        break;
-                }
-            },
-        );
+                    html2pdf().set(opt).from(editor.previewPane).save();
+                    setTimeout(() => {
+                        editor.previewPane.classList.add("preview-editor-view");
+                    }, 1000);
+                    break;
+                default:
+                    break;
+            }
+        };
+        menu.addEventListener("click", eventHandle);
     },
     interactive: true,
     placement: "auto",
