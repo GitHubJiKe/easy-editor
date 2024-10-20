@@ -92,6 +92,9 @@ tippy(shareBtn!, {
                 case "pdf":
                     editor.previewPane.classList.remove("preview-editor-view");
                     const filename = prompt("type in filename", "easy-editor");
+                    if (!filename) {
+                        return;
+                    }
                     const opt = {
                         margin: 1,
                         filename: filename + ".pdf",
