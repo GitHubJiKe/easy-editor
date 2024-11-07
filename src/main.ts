@@ -127,7 +127,7 @@ tippy(shareBtn!, {
                     const title = content.slice(0, 10)
                     upload({
                         file: content,
-                        filename: new Date().toLocaleDateString(),
+                        filename: new Date().toLocaleDateString() + "_" + Date.now(),
                         commitmsg: title,
                         githubUrl: "https://github.com/GitHubJiKe/screenshots",
                     }).then(() => {
