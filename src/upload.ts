@@ -20,7 +20,8 @@ export async function upload({ file, filepath = FILE_PATH, filename, commitmsg, 
         return 'fail'
     }
     // 配置
-    const GITHUB_TOKEN = githubToken || process.env.TOKEN;
+    // @ts-ignore
+    const GITHUB_TOKEN = githubToken || window.localStorage.getItem('GITHUB_TOKEN');
     const UPLOAD_PATH = filepath ? `${filepath}/${filename}.md` : `${filename}.md`;
     const COMMIT_MESSAGE = commitmsg;
 
