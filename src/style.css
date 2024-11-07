@@ -34,9 +34,10 @@ body {
 .noto-serif-sc-easy-editor {
     font-family: "Noto Serif SC", serif;
     font-optical-sizing: auto;
-    font-weight: 600;
+    font-weight: normal !important;
+    color: #333 !important;
     font-style: normal;
-    font-size: 0.8rem;
+    font-size: 1rem !important;
 }
 
 .btns {
