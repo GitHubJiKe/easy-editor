@@ -8,6 +8,7 @@ import "./style.css";
 import "./github.markdown.css";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/material.css";
+import { upload } from "./upload";
 
 const editor = new EasyEditor();
 
@@ -32,9 +33,10 @@ previewBtn?.addEventListener("click", () => {
 tippy(shareBtn!, {
     allowHTML: true,
     content: `<div id="menu">
-      <button id="png">PNG</button>
-      <button id="mobile">Mobile</button>
-      <button id="pdf">PDF</button>
+      <button id="png">Download PNG</button>
+      <button id="mobile">Download Mobile</button>
+      <button id="pdf">Download PDF</button>
+      <button id="github">2Github</button>
     </div>`,
     onShown(instance) {
         const menu = (document.querySelector("#menu") as HTMLDivElement)!;
@@ -119,6 +121,20 @@ tippy(shareBtn!, {
                     setTimeout(() => {
                         editor.previewPane.classList.add("preview-editor-view");
                     }, 1000);
+                    break;
+                case "github":
+                    const content = editor.content()
+                    const title = content.slice(0, 10)
+                    upload({
+                        file: content,
+                        filename: new Date().toLocaleDateString(),
+                        commitmsg: title,
+                        githubUrl: "https://github.com/GitHubJiKe/screenshots",
+                    }).then(() => {
+                        alert("上传成功")
+                    }).catch(function (error: Error) {
+                        console.error("oops, something went wrong!", error);
+                    })
                     break;
                 default:
                     break;

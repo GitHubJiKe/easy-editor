@@ -59,6 +59,7 @@ body {
     border: 1px solid #333;
     border-radius: 0.2rem;
 }
+
 .preview-editor-view-mobile {
     width: 24rem !important;
     outline: none;
@@ -82,7 +83,7 @@ body {
 }
 
 button {
-    width: 100px;
+    min-width: 100px;
     height: 36px;
     cursor: pointer;
     background-color: #fff;
@@ -90,4 +91,10 @@ button {
     border: 1px solid #333;
     border-radius: 0.2rem;
     line-height: 34px;
+}
+
+#menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
 }
