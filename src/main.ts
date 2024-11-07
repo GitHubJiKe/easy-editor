@@ -34,7 +34,6 @@ tippy(shareBtn!, {
     allowHTML: true,
     content: `<div id="menu">
       <button id="png">Download PNG</button>
-      <button id="mobile">Download Mobile</button>
       <button id="pdf">Download PDF</button>
       <button id="github">2Github</button>
     </div>`,
@@ -64,33 +63,7 @@ tippy(shareBtn!, {
                             console.error("oops, something went wrong!", error);
                         });
                     break;
-                case "mobile":
-                    editor.previewPane.classList.add(
-                        "preview-editor-view-mobile",
-                    );
-                    htmlToImage
-                        .toPng(editor.previewPane)
-                        .then(function (dataUrl: string) {
-                            const filename = prompt(
-                                "type in filename",
-                                "easy-editor",
-                            );
 
-                            if (!filename) {
-                                return;
-                            }
-                            // @ts-ignore
-                            download(dataUrl, filename + ".png");
-                        })
-                        .catch(function (error: Error) {
-                            console.error("oops, something went wrong!", error);
-                        });
-                    setTimeout(() => {
-                        editor.previewPane.classList.remove(
-                            "preview-editor-view-mobile",
-                        );
-                    }, 1000);
-                    break;
                 case "pdf":
                     editor.previewPane.classList.remove("preview-editor-view");
                     const filename = prompt("type in filename", "easy-editor");
